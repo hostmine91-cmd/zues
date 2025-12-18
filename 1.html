@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зевс - Бог Грома и Молний | Ершов Иван</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a1931 0%, #185adb 100%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide {
+            display: none;
+            animation: fadeIn 0.8s ease;
+            height: 100vh;
+            padding-top: 40px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .author {
+            font-size: 1.2rem;
+            color: #87CEEB;
+            font-weight: bold;
+        }
+        
+        .slide-number {
+            background: #FF8C00;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+        }
+        
+        .content-box {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #FFD700;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+        
+        .god-title {
+            color: #FFD700;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #87CEEB;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .info-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        
+        .powers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .power-card {
+            background: linear-gradient(135deg, #1a237e, #311b92);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #FFD700;
+        }
+        
+        .power-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .power-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .power-name {
+            color: #FFD700;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .facts-list {
+            list-style: none;
+            padding: 20px;
+        }
+        
+        .facts-list li {
+            background: rgba(255, 215, 0, 0.1);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #FFD700;
+        }
+        
+        .symbols-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .symbol {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            min-width: 120px;
+        }
+        
+        .symbol-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, #FF8C00, #FFD700);
+            border: none;
+            border-radius: 25px;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+        }
+        
+        .nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.6);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700, #FF8C00);
+            transition: width 0.3s;
+        }
+        
+        .image-placeholder {
+            width: 200px;
+            height: 250px;
+            background: linear-gradient(135deg, #2a2a72, #009ffd);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 30px;
+            border: 3px solid #FFD700;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">⚡ ЗЕВС - ЦАРЬ БОГОВ ⚡</h1>
+            <div class="author">Презентация: Ершов Иван</div>
+        </div>
+        
+        <!-- Слайд 1 -->
+        <div class="slide active" id="slide1">
+            <div class="slide-number">1</div>
+            <div class="content-box">
+                <div class="image-placeholder">⚡</div>
+                <h2 class="god-title">КТО ТАКОЙ ЗЕВС?</h2>
+                <p class="subtitle">Верховный бог древнегреческой мифологии</p>
+                
+                <div class="info-text">
+                    <p><span class="highlight">Зевс</span> - главный бог древних греков, правитель неба, грома и молний.</p>
+                    <p>Он царь всех богов на священной горе <span class="highlight">Олимп</span>.</p>
+                    <p>Сын титана <span class="highlight">Кроноса</span> и богини <span class="highlight">Реи</span>.</p>
+                    <p>Победил своего отца и титанов в великой войне - <span class="highlight">Титаномахии</span>.</p>
+                    <p>Управляет миром, справедливостью и судьбой.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Слайд 2 -->
+        <div class="slide" id="slide2">
+            <div class="slide-number">2</div>
+            <div class="content-box">
+                <h2 class="god-title">ВЕЛИКИЕ СИЛЫ ЗЕВСА</h2>
+                <p class="subtitle">Невероятные способности бога</p>
+                
+                <div class="powers-grid">
+                    <div class="power-card">
+                        <div class="power-icon">⚡</div>
+                        <div class="power-name">Молнии и Гром</div>
+                        <p>Метает молнии как оружие, управляет грозами</p>
+                    </div>
+                    
+                    <div class="power-card">
+                        <div class="power-icon">👑</div>
+                        <div class="power-name">Верховная Власть</div>
+                        <p>Царь всех богов, правитель неба и земли</p>
+                    </div>
+                    
+                    <div class="power-card">
+                        <div class="power-icon">🔄</div>
+                        <div class="power-name">Перевоплощение</div>
+                        <p>Меняет облик: бык, лебедь, золотой дождь</p>
+                    </div>
+                    
+                    <div class="power-card">
+                        <div class="power-icon">⚖️</div>
+                        <div class="power-name">Справедливость</div>
+                        <p>Вершит правосудие, наказывает и вознаграждает</p>
+                    </div>
+                    
+                    <div class="power-card">
+                        <div class="power-icon">🔮</div>
+                        <div class="power-name">Предвидение</div>
+                        <p>Знает будущее, управляет судьбами</p>
+                    </div>
+                    
+                    <div class="power-card">
+                        <div class="power-icon">🌪️</div>
+                        <div class="power-name">Стихии</div>
+                        <p>Управляет погодой и природными явлениями</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Слайд 3 -->
+        <div class="slide" id="slide3">
+            <div class="slide-number">3</div>
+            <div class="content-box">
+                <h2 class="god-title">РОДИТЕЛИ И СЕМЬЯ</h2>
+                <p class="subtitle">Происхождение и родственные связи</p>
+                
+                <div class="info-text">
+                    <p><span class="highlight">Отец:</span> Кронос - титан, пожиравший своих детей</p>
+                    <p><span class="highlight">Мать:</span> Рея - богиня, спасшая Зевса от отца</p>
+                    <p><span class="highlight">Супруга:</span> Гера - царица богов, богиня брака</p>
+                    
+                    <h3 style="color: #FFD700; margin: 20px 0 10px;">Братья и сестры:</h3>
+                    <ul class="facts-list">
+                        <li><span class="highlight">Посейдон</span> - бог морей</li>
+                        <li><span class="highlight">Аид</span> - бог подземного мира</li>
+                        <li><span class="highlight">Деметра</span> - богиня урожая</li>
+                        <li><span class="highlight">Гестия</span> - богиня домашнего очага</li>
+                        <li><span class="highlight">Гера</span> - супруга и сестра</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Слайд 4 -->
+        <div class="slide" id="slide4">
+            <div class="slide-number">4</div>
+            <div class="content-box">
+                <h2 class="god-title">ДЕТИ ЗЕВСА</h2>
+                <p class="subtitle">Знаменитое потомство</p>
+                
+                <div class="powers-grid">
+                    <div class="power-card">
+                        <div class="power-icon">🦉</div>
+                        <div class="power-name">Афина</div>
+                        <p>Богиня мудрости и войны</p>
+                    </div>
+                    
+                    <div class="power-card">
+                        <div class="power-icon">☀️</div>
+                        <div class="power-name">Аполлон</div>
+                        <p>Бог солнца и искусства</p>
+                    </div>
+                    
+                    <div class="power-card">
+                        <div class="power-icon">🏹</div>
+                        <div class="power-name">Артемида</div>
+                        <p>Богиня охоты и луны</p>
+                    </div>
+                    
+                    <div class="power-card">
+                        <div class="power-icon">⚔️</div>
+                        <div class="power-name">Арес</div>
+                        <p>Бог войны</p>
+                    </div>
+                    
+                    <div class="power-card">
+                        <div class="power-icon">🕊️</div>
+                        <div class="power-name">Гермес</div>
+                        <p>Бог торговли и вестник</p>
+                    </div>
+                    
+                    <div class="power-card">
+                        <div class="power-icon">💪</div>
+                        <div class="power-name">Геракл</div>
+                        <p>Величайший герой Греции</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Слайд 5 -->
+        <div class="slide" id="slide5">
+            <div class="slide-number">5</div>
+            <div class="content-box">
+                <h2 class="god-title">ИНТЕРЕСНЫЕ ФАКТЫ</h2>
+                <p class="subtitle">Малоизвестные подробности</p>
+                
+                <ul class="facts-list">
+                    <li>Зевс превратился в <span class="highlight">золотой дождь</span>, чтобы проникнуть к Данае</li>
+                    <li>В облике <span class="highlight">быка</span> похитил Европу</li>
+                    <li>Стал <span class="highlight">лебедем</span> для встречи с Ледой</li>
+                    <li>Его имя означает <span class="highlight">"светлое небо"</span></li>
+                    <li>Орел приносил ему молнии с горы Ида</li>
+                    <li>Первый храм Зевса построен в <span class="highlight">Додоне</span></li>
+                    <li><span class="highlight">Олимпийские игры</span> проводились в его честь</li>
+                    <li>Статуя Зевса в Олимпии - одно из 7 чудес света</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Слайд 6 -->
+        <div class="slide" id="slide6">
+            <div class="slide-number">6</div>
+            <div class="content-box">
+                <h2 class="god-title">СИМВОЛЫ И АТРИБУТЫ</h2>
+                <p class="subtitle">Как изображали бога</p>
+                
+                <div class="symbols-container">
+                    <div class="symbol">
+                        <div class="symbol-emoji">⚡</div>
+                        <div>Молния</div>
+                    </div>
+                    
+                    <div class="symbol">
+                        <div class="symbol-emoji">🦅</div>
+                        <div>Орел</div>
+                    </div>
+                    
+                    <div class="symbol">
+                        <div class="symbol-emoji">🌩️</div>
+                        <div>Гром</div>
+                    </div>
+                    
+                    <div class="symbol">
+                        <div class="symbol-emoji">👑</div>
+                        <div>Корона</div>
+                    </div>
+                    
+                    <div class="symbol">
+                        <div class="symbol-emoji">🗿</div>
+                        <div>Скипетр</div>
+                    </div>
+                    
+                    <div class="symbol">
+                        <div class="symbol-emoji">🌍</div>
+                        <div>Земной шар</div>
+                    </div>
+                </div>
+                
+                <div class="info-text" style="margin-top: 30px;">
+                    <p>Зевса всегда изображали как <span class="highlight">мудрого, могучего мужчину</span> с бородой.</p>
+                    <p>В правой руке он держит <span class="highlight">молнию</span>, в левой - <span class="highlight">скипетр</span>.</p>
+                    <p>Рядом с ним всегда находится его священная птица - <span class="highlight">орел</span>.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Слайд 7 -->
+        <div class="slide" id="slide7">
+            <div class="slide-number">7</div>
+            <div class="content-box">
+                <h2 class="god-title">НАСЛЕДИЕ ЗЕВСА</h2>
+                <p class="subtitle">Влияние на культуру и историю</p>
+                
+                <div class="info-text">
+                    <p>Имя Зевса упоминается в:</p>
+                    <ul class="facts-list">
+                        <li><span class="highlight">Астрономии:</span> Планета Юпитер (римский аналог Зевса)</li>
+                        <li><span class="highlight">Литературе:</span> От Гомера до современных авторов</li>
+                        <li><span class="highlight">Искусстве:</span> Сотни картин и скульптур</li>
+                        <li><span class="highlight">Языке:</span> Слово "диез" в музыке от греческого "diesis"</li>
+                        <li><span class="highlight">Науке:</span> Термин "зоология" от "zoon" - животное</li>
+                    </ul>
+                    
+                    <div style="text-align: center; margin-top: 30px; padding: 20px; background: rgba(255, 215, 0, 0.1); border-radius: 10px;">
+                        <h3 style="color: #FFD700;">Презентация подготовлена</h3>
+                        <p>Ершов Иван</p>
+                        <p>Изучение древнегреческой мифологии</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn" onclick="prevSlide()">◀ Назад</button>
+            <button class="nav-btn" onclick="nextSlide()">Вперед ▶</button>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 7;
+        
+        function showSlide(n) {
+            // Скрыть все слайды
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Обновить текущий слайд
+            if (n < 1) currentSlide = totalSlides;
+            if (n > totalSlides) currentSlide = 1;
+            
+            // Показать текущий слайд
+            document.getElementById(`slide${currentSlide}`).classList.add('active');
+            
+            // Обновить прогресс-бар
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+            
+            // Обновить номер слайда
+            const slideNumbers = document.querySelectorAll('.slide-number');
+            slideNumbers.forEach((num, index) => {
+                if (index === currentSlide - 1) {
+                    num.textContent = currentSlide;
+                }
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+        
+        // Управление клавиатурой
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        // Инициализация
+        showSlide(1);
+    </script>
+</body>
+</html>
